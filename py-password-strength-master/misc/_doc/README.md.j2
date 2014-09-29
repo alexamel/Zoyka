@@ -1,0 +1,82 @@
+[![Build Status](https://api.travis-ci.org/kolypto/py-password-strength.png?branch=master)](https://travis-ci.org/kolypto/py-password-strength)
+
+
+Password Strength
+=================
+
+Password strength and validation.
+
+
+PasswordPolicy
+==============
+
+{{ PasswordPolicy.class.clsdoc }}
+
+Init Policy
+-----------
+
+```python
+{{ PasswordPolicy.class.signature }}
+```
+
+{{ PasswordPolicy.class.doc }}
+
+Alternatively:
+
+```python
+{{ PasswordPolicy.attrs.from_names.qsignature }}
+```
+
+{{ PasswordPolicy.attrs.from_names.doc }}
+
+
+Bundled Tests
+-------------
+
+{{ tests.module.doc }}
+
+{% for test in tests.attrs.values() %}
+#### tests.{{ test.signature }}
+{{ test.doc }}
+{% endfor %}
+
+Testing
+-------
+
+After the `PasswordPolicy` is initialized, there are two methods to test:
+
+### {{ PasswordPolicy.attrs.password.qualname }}
+```python
+{{ PasswordPolicy.attrs.password.signature }}
+```
+{{ PasswordPolicy.attrs.password.doc }}
+
+### {{ PasswordPolicy.attrs.test.qualname }}
+```python
+{{ PasswordPolicy.attrs.test.signature }}
+```
+{{ PasswordPolicy.attrs.test.doc }}
+
+
+Custom Tests
+------------
+
+{{ ATest.doc }}
+
+
+PasswordStats
+-------------
+
+{{ PasswordStats.class.doc }}
+
+Constructor:
+
+```python
+from password_strength import PasswordStats
+{{ PasswordStats.class.signature }}
+```
+
+{% for stat in PasswordStats.attrs.values() %}
+#### PasswordStats.{{ stat.signature }}
+{{ stat.doc }}
+{% endfor %}

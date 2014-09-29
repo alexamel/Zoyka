@@ -1,0 +1,3 @@
+[console_scripts]
+passwordstrength = passwordstrength.passwordstrength:main
+
