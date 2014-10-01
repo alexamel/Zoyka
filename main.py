@@ -3,6 +3,7 @@
 import sys
 import os
 import signal
+import re
 
 from PyQt4 import QtGui, QtCore, uic
 
@@ -32,14 +33,18 @@ class SignInForm(QtGui.QWidget):
 			self.InfLabel.setText(u'Не заполнено поле')
 			self.InfLabel.show()
 		else:
-			user = Account.get(login=login)
 
-			if user:
-				if login == user.login and password == user.password:
-					self.form = InfoForm(login)
-					self.form.show()
-					self.close()	
-			else:
+			try:
+				user = Account.get(login=login)
+				if user:
+					if login == user.login and password == user.password:
+						self.form = InfoForm(login)
+						self.form.show()
+						self.close()
+					else:
+						self.InfLabel.setText(u'Неправильный логин или пароль') 
+						self.InfLabel.show()	
+			except:
 				self.InfLabel.setText(u'Неправильный логин или пароль') 
 				self.InfLabel.show()
 
@@ -109,12 +114,19 @@ class SignUpForm(QtGui.QWidget):
 
 			if not login:
 				self.OkButton.setDisabled(True)
-
-			elif passwordStrength > 10:
-				self.OkButton.setEnabled(True)
 			else:
-				self.OkButton.setDisabled(True)
-				self.PasswordLabel.setText(u'Слишком слабый пароль')
+				pattern = re.compile(r'\w+')
+				result = re.match(pattern, login)
+				if not result:
+					self.PasswordLabel.setText(u'Запрещенные символы в логине')
+					return
+
+
+				if passwordStrength > 10:
+					self.OkButton.setEnabled(True)
+				else:
+					self.OkButton.setDisabled(True)
+					self.PasswordLabel.setText(u'Слишком слабый пароль')
 
 		
 	def save(self):
